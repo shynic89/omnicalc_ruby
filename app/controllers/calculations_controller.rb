@@ -37,8 +37,8 @@ class CalculationsController < ApplicationController
     # The number of years the user input is in the integer @years.
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
-
-    @monthly_payment = "Replace this string with your answer."
+    
+    @monthly_payment = @principal / ((1 + @apr / 12)**( @years * 12))
 
     # ================================================================================
     # Your code goes above.
@@ -48,8 +48,8 @@ class CalculationsController < ApplicationController
   end
 
   def time_between
-    @starting = Chronic.parse(params[:starting_time])
-    @ending = Chronic.parse(params[:ending_time])
+    @starting = Time.parse(params[:starting_time])
+    @ending = Time.parse(params[:ending_time])
 
     # ================================================================================
     # Your code goes below.
@@ -60,12 +60,12 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+    @seconds = @ending - @starting
+    @minutes = @seconds / 60
+    @hours = @minutes / 60
+    @days = @hours / 24
+    @weeks = @days / 7
+    @years = @weeks / 52
 
     # ================================================================================
     # Your code goes above.
