@@ -48,8 +48,8 @@ class CalculationsController < ApplicationController
   end
 
   def time_between
-    @starting = Time.parse(params[:starting_time])
-    @ending = Time.parse(params[:ending_time])
+    @starting = Chronic.parse(params[:starting_time])
+    @ending = Chronic.parse(params[:ending_time])
 
     # ================================================================================
     # Your code goes below.
