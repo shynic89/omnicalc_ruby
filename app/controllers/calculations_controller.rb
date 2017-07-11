@@ -116,8 +116,18 @@ class CalculationsController < ApplicationController
 
     @standard_deviation = @variance**0.5
 
-    @mode = @numbers.sort
-    
+  
+    occurance = [ ]
+    @numbers.each do |i|
+      frequent = @numbers.count(i)
+      occurance.push(frequent)
+    end
+      if occurance.max == 1
+        @mode = @numbers.first
+      else
+        po = occurance.index(occurance.max)
+        @mode = @numbers[po]
+      end
 
     # ================================================================================
     # Your code goes above.
