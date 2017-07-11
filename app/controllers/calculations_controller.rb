@@ -67,7 +67,7 @@ class CalculationsController < ApplicationController
     @hours = @minutes / 60
     @days = @hours / 24
     @weeks = @days / 7
-    @years = @weeks / 52
+    @years = @days / 365
 
     # ================================================================================
     # Your code goes above.
@@ -94,10 +94,11 @@ class CalculationsController < ApplicationController
 
     @range = @numbers.max - @numbers.min
 
+    @position = @count - 1
     if @count.even?
-    @median = (@sorted_numbers[@count / 2] + @sorted_numbers[@count / 2 + 1]) / 2
+    @median = (@sorted_numbers[@position / 2] + @sorted_numbers[@position / 2 + 1]) / 2
     else
-    @median = @sorted_numbers[(@count + 1) / 2]
+    @median = @sorted_numbers[(@position + 1) / 2]
     end 
     
     @sum = @numbers.sum
