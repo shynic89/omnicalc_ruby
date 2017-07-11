@@ -17,7 +17,7 @@ class CalculationsController < ApplicationController
 
     @character_count_without_spaces = @text.gsub(/\s+/, "").length
 
-    @occurrences = @text.split.count(@special_word.to_s)
+    @occurrences = @text.split.count(:user_word.to_s)
 
     # ================================================================================
     # Your code goes above.
@@ -38,7 +38,9 @@ class CalculationsController < ApplicationController
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
     
-    @monthly_payment = ( @principal / (1 + @apr) ** @years ) / 12
+    @monthly_rate = @apr / 100 / 12
+    @months = @years * 12
+    @monthly_payment = @principal * @monthly_rate / (1 - (1 + @monthly_rate) ** - @months)
 
     # ================================================================================
     # Your code goes above.
@@ -82,27 +84,38 @@ class CalculationsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer."
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer."
+    @count = @numbers.count
 
-    @minimum = "Replace this string with your answer."
+    @minimum = @numbers.min
 
-    @maximum = "Replace this string with your answer."
+    @maximum = @numbers.max
 
-    @range = "Replace this string with your answer."
+    @range = @numbers.max - @numbers.min
 
-    @median = "Replace this string with your answer."
+    if @count.even?
+    @median = (@sorted_numbers[@count / 2] + @sorted_numbers[@count / 2 + 1]) / 2
+    else
+    @median = @sorted_numbers[(@count + 1) / 2]
+    end 
+    
+    @sum = @numbers.sum
 
-    @sum = "Replace this string with your answer."
+    @mean = @numbers.sum / @numbers.count
 
-    @mean = "Replace this string with your answer."
+    squared_numbers = []
+    @numbers.each do |num|
+      var = num - @mean
+      squared_numbers.push(var**2)
+    end
+    
+    @variance = squared_numbers.sum / @numbers.count  
 
-    @variance = "Replace this string with your answer."
+    @standard_deviation = @variance**0.5
 
-    @standard_deviation = "Replace this string with your answer."
-
-    @mode = "Replace this string with your answer."
+    @mode = @numbers.sort
+    
 
     # ================================================================================
     # Your code goes above.
